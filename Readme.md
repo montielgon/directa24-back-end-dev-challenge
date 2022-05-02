@@ -1,4 +1,4 @@
-# Directa24 Back-End Developer Challenge 
+# Gonzalo Montiel - Directa24 Back-End Developer Challenge 
 
 >  
 > **IMPORTANT**: To submit your solution please fork this repo and send the url of the new repo via email
