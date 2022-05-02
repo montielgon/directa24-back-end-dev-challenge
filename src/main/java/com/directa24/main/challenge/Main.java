@@ -24,7 +24,7 @@ public class Main {
 	 */
 	public static List<String> getDirectors(int threshold) {
 		List<String> directors = MovieService.getDirectorsWithNMoviesAlphabetically(threshold);
-		log.debug("Directors with at least {} movies directed: {}", threshold, directors);
+		log.info("Directors with at least {} movies directed: {}", threshold, directors);
 		return directors;
 	}
 

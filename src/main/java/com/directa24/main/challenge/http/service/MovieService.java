@@ -11,21 +11,25 @@ import com.directa24.main.challenge.http.client.MovieClient;
 import com.directa24.main.challenge.http.dto.Movie;
 import com.directa24.main.challenge.http.dto.Page;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 public class MovieService {
 
 	public static List<String> getDirectorsWithNMoviesAlphabetically(int threshold) {
-		Map<String, Integer> mapMoviesPerDirector = geAmountOfMoviesPerDirectorMap();
+		Map<String, Integer> mapMoviesPerDirector = getAmountOfMoviesPerDirectorMap();
 
 		List<String> directors = filterDirectorsWithNMoviesAlphabetically(mapMoviesPerDirector, threshold);
 		return directors;
 	}
 
-	private static Map<String, Integer> geAmountOfMoviesPerDirectorMap() {
+	private static Map<String, Integer> getAmountOfMoviesPerDirectorMap() {
 		Map<String, Integer> mapMoviesPerDirector = new HashMap<>();
 		Integer amountOfPages = null;
 		Integer currentPage = 1;
 		Page<Movie> pageOfMovies = null;
 
+		log.debug("Fetching all movies");
 		do {
 			pageOfMovies = MovieClient.findAllByPage(currentPage);
 			if (isResponseValid(pageOfMovies)) {
@@ -38,6 +42,8 @@ public class MovieService {
 				currentPage++;
 			}
 		} while (currentPage <= amountOfPages || !isResponseValid(pageOfMovies));
+		log.debug("Map of movies by director: {}", mapMoviesPerDirector);
+
 		return mapMoviesPerDirector;
 	}
 
@@ -59,6 +65,7 @@ public class MovieService {
 		List<String> directors = new ArrayList<>();
 		mapMoviesPerDirector.forEach((director, amountOfMovies) -> {
 			if (amountOfMovies > threshold) {
+				log.debug("{} has directed more than {} movies.", director, threshold);
 				directors.add(director);
 			}
 		});
