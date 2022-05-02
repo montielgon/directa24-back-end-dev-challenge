@@ -1,4 +1,4 @@
-package com.directa24.main.challenge.dto;
+package com.directa24.main.challenge.http.dto;
 
 import java.util.List;
 

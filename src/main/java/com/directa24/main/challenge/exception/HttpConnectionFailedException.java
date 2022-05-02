@@ -1,11 +1,12 @@
 package com.directa24.main.challenge.exception;
 
-public class HttpConnectionFailedException extends RuntimeException {
+public class HttpConnectionFailedException extends BaseException {
+	private static final long serialVersionUID = -8886877767564628422L;
+	private static final int STATUS = 400;
+	private static final String MSG = "Mandatory http connection not established.";
 
-	private static final long serialVersionUID = 120178429610134018L;
-
-	public HttpConnectionFailedException(String message) {
-		super(message);
+	public HttpConnectionFailedException() {
+		super(MSG, STATUS);
 	}
 
 }
